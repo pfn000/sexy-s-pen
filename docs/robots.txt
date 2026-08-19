@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pfn000.github.io/sexy-s-pen/sitemap.xml

@@ -116,6 +116,8 @@ cmake --build build
 
 The repository contains Qt 6/QML source, a C++ controller, packaging files, feature documentation, and the supplied pen reference images. The final binaries should be built on CachyOS, Arch Linux, or CI with the Qt development packages installed.
 
+For deeper background, setup instructions, architecture notes, compatibility details, and troubleshooting, visit the **[Sexy S-Pen Documentation site](https://pfn000.github.io/sexy-s-pen/)**.
+
 ## Image attribution
 
 The two README product images were supplied by the project owner and are preserved with their original source URLs in [`docs/assets/README-image-sources.md`](docs/assets/README-image-sources.md). Before a formal Flathub submission or other redistribution, verify that the image licenses permit repository redistribution; replace them with project-created or permissively licensed assets if necessary.

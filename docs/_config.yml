@@ -1,0 +1,22 @@
+title: Sexy S-Pen Documentation
+description: Artist-first Surface Pen controls for KDE Plasma, Wayland, CachyOS, Arch Linux, and Surface Linux.
+url: "https://pfn000.github.io"
+baseurl: "/sexy-s-pen"
+repository: pfn000/sexy-s-pen
+remote_theme: pages-themes/minimal@v0.2.0
+logo: /sexy-s-pen/assets/microsoft-surface-pen.png
+show_downloads: true
+author:
+  name: pfn000
+  twitter: false
+social:
+  name: Sexy S-Pen
+  links:
+    - https://github.com/pfn000/sexy-s-pen
+    - https://signal.me/#eu/ZIWHg_RQMXsICHB_NBchn-W3n2tzj1M7WuZnmGIL7W3nWHugo6sx-MaY_8jJmPYSfc
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+markdown: kramdown
+kramdown:
+  input: GFM
