@@ -1,0 +1,20 @@
+app-id: io.github.sexyspen.SexySPen
+runtime: org.kde.Platform
+runtime-version: '6.8'
+sdk: org.kde.Sdk
+command: sexy-s-pen
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --talk-name=org.bluez
+  - --talk-name=org.freedesktop.DBus
+modules:
+  - name: sexy-s-pen
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: dir
+        path: ..

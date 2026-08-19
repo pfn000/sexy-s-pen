@@ -1,0 +1,20 @@
+pkgname=sexy-s-pen
+pkgver=0.2.0
+pkgrel=1
+pkgdesc='Artist-oriented Surface Pen control centre for KDE Wayland'
+arch=('x86_64')
+url='https://github.com/pfn000/sexy-s-pen'
+license=('GPL-3.0-or-later')
+depends=('qt6-base' 'qt6-declarative')
+makedepends=('cmake' 'ninja')
+source=("sexy-s-pen-${pkgver}.tar.gz::https://github.com/pfn000/sexy-s-pen/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cmake -S "${srcdir}/sexy-s-pen-${pkgver}" -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+  cmake --build build
+}
+
+package() {
+  DESTDIR="${pkgdir}" cmake --install build
+}

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Sexy S-Pen
+GenericName=Surface Pen Control
+Comment=Artist-grade Surface Pen controls for KDE Wayland
+Exec=sexy-s-pen
+Icon=input-tablet
+Terminal=false
+Type=Application
+Categories=Settings;HardwareSettings;Qt;Graphics;
+Keywords=Surface;Pen;Stylus;Tablet;KDE;Wayland;IPTSD;
