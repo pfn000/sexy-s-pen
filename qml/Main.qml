@@ -74,7 +74,7 @@ ApplicationWindow {
 
             RowLayout { Layout.fillWidth: true; spacing: 18
                 Button { Layout.fillWidth: true; text: pairing ? "Listening for pen…" : "Pair / reconnect pen"; enabled: !pairing; onClicked: { pairing = true; pairTimer.restart() } }
-                Button { Layout.fillWidth: true; text: "Open calibration"; onClicked: penController.setStatus("Use Plasma Drawing Tablet calibration for four-point parallax correction") }
+                Button { Layout.fillWidth: true; text: "Open calibration"; onClicked: penController.announce("Use Plasma Drawing Tablet calibration for four-point parallax correction") }
                 Button { Layout.fillWidth: true; text: "Reset"; onClicked: penController.reset() }
             }
 

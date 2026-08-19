@@ -61,6 +61,7 @@ public:
     Q_INVOKABLE void setProfile(const QString &profile);
     Q_INVOKABLE void pairPen();
     Q_INVOKABLE void checkForUpdates();
+    Q_INVOKABLE void announce(const QString &message);
     Q_INVOKABLE QString integrationSummary() const;
 
 signals:

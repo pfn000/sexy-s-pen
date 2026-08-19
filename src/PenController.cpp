@@ -120,6 +120,10 @@ void PenController::checkForUpdates() {
     emit updateStatusChanged();
 }
 
+void PenController::announce(const QString &message) {
+    setStatus(message);
+}
+
 QString PenController::integrationSummary() const {
     if (!m_iptsdDetected) return QStringLiteral("Install iptsd from linux-surface to connect palm rejection to the Surface touchscreen daemon.");
     return QStringLiteral("IPTSD detected. Pressure is available in this profile; tilt and hover unlock when the kernel/compositor reports those axes.");

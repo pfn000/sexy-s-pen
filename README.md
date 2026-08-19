@@ -1,55 +1,83 @@
-# Surface Pen Control
+# Sexy S-Pen
 
-Surface Pen Control is a lightweight Qt 6/QML control panel intended for KDE Plasma on Wayland. It provides a polished interface for per-user pen preferences, including palm-rejection profiles, grace periods, tip feel, tip-distance compensation, hover feedback, and button mappings.
+**Sexy S-Pen** is a lightweight Qt 6/QML artist control centre for Microsoft Surface Pen devices running Surface Linux, Arch-based distributions, KDE Plasma, and Wayland.
 
-The application is deliberately designed as a control and profile layer rather than a replacement kernel driver. On Surface devices, `iptsd` reads raw touchscreen and stylus measurements and creates standard input events through `uinput` [1]. Its configuration exposes `DisableOnPalm`, `DisableOnStylus`, touchscreen overshoot, and stylus tip-distance compensation [2]. libinput and the Wayland compositor determine which pressure, tilt, proximity, eraser, and button events are actually available to applications [3].
+Repository: [github.com/pfn000/sexy-s-pen](https://github.com/pfn000/sexy-s-pen)
 
-## Current implementation
+The application brings together palm-rejection profiles, pressure and smoothing preferences, hover and tilt capability reporting, button mappings, Bluetooth pairing handoff, battery-state monitoring, Plasma calibration guidance, Flatpak packaging, an Arch `PKGBUILD`, and a transparent shell installer.
 
-| Area | Implemented behavior |
-|---|---|
-| Palm rejection | Balanced, Writing, Drawing, and Touch-first profiles; `DisableOnStylus`; `DisableOnPalm`; grace-period preference |
-| Pen feel | Tip threshold, soft/linear/firm curve preference, tip-distance compensation |
-| Pen status | IPTSD configuration detection and an explicit capability/integration message |
-| Hover | User preference for a visual hover indicator; capability text avoids claiming unsupported hover distance |
-| Buttons | Side-action and rear/eraser action mappings stored per user |
-| Appearance | Rounded 24 px cards, elevated dark status panel, KDE-friendly system palette, responsive two-column layout |
-| Safety boundary | Settings are saved under the user configuration directory. The GUI does not run arbitrary root commands or overwrite `/etc/iptsd.conf` directly. |
+## What it can support
 
-## Build on CachyOS or Arch Linux
+Sexy S-Pen follows a progressive-enhancement model. IPTSD can expose Surface touchscreen and stylus data, including configuration switches such as `DisableOnPalm`, `DisableOnStylus`, and stylus tip-distance compensation [1] [2]. libinput and the Wayland compositor determine whether pressure, tilt, proximity, eraser, and button events are available [3]. BlueZ can expose a read-only battery percentage through its `org.bluez.Battery1` D-Bus interface when the pen reports it [4].
 
-Install the Qt 6 development packages, CMake, Ninja, and a compiler using the package manager. The exact package names can vary slightly between Arch derivatives, but the usual command is:
+| Capability | Behavior in Sexy S-Pen | Reality check |
+|---|---|---|
+| Palm rejection | Writing, Drawing, Balanced, and Touch-first profiles; proximity rejection; grace period | Strongly supportable through IPTSD on supported Surface devices |
+| Pressure and artist feel | Tip threshold, soft/linear/firm curves, smoothing, profile presets | Requires a pressure axis from the running input stack |
+| Tilt and hover | Capability chips and future live meters | Depends on kernel, device, compositor, and application support |
+| Buttons | Undo, eraser, mouse-style, redo, and custom-action concepts | Wayland keyboard actions are safer; click injection may need a helper |
+| Pairing | Opens KDE Bluetooth settings with an animated in-app transition | The user still puts the pen into pairing mode |
+| Battery | Polls `bluetoothctl` and handles percentage, unknown, disconnected, and stale states | Only works when BlueZ receives battery data from the pen |
+| Calibration | Opens a guided Plasma-calibration status path | Plasma/KWin owns the actual calibration matrix |
+| iPad-inspired UX | Animated connection bubble, tool-profile flow, hover concept, double-action-ready architecture | Apple-only squeeze, barrel roll, haptics, magnetic charging, and Find My cannot be fabricated on Surface hardware |
+
+## Install from the public repository
+
+On CachyOS or Arch Linux, install the build dependencies and build locally:
 
 ```bash
 sudo pacman -S --needed base-devel cmake ninja qt6-base qt6-declarative
+git clone https://github.com/pfn000/sexy-s-pen.git
+cd sexy-s-pen
+./scripts/install-sexy-s-pen.sh build
 ```
 
-Then build and install:
+The installer builds from the checked-out source and asks for `sudo` only for the final installation step. It does not download and execute an unverified remote script.
+
+The requested `sudo pacman -S sexy-s-pen` command becomes valid only after `sexy-s-pen` is published in an official repository or a configured custom repository. The immediate Arch-native path is the included `PKGBUILD`:
+
+```bash
+cd packaging
+makepkg -si
+```
+
+For the AUR, the package should be reviewed and submitted under the name `sexy-s-pen`. AUR packages are user-produced PKGBUILDs, so users should inspect them before building [5].
+
+## Flatpak
+
+The repository includes `packaging/io.github.sexyspen.SexySPen.yml`. Flatpak isolates applications and requires explicit permissions for resources such as Wayland, graphics, and Bluetooth D-Bus access [6]. Build locally with:
+
+```bash
+sudo pacman -S --needed flatpak flatpak-builder
+git clone https://github.com/pfn000/sexy-s-pen.git
+cd sexy-s-pen
+./scripts/install-sexy-s-pen.sh flatpak
+```
+
+A future Flathub submission should keep permissions narrow and should use a separate, carefully scoped host integration mechanism if applying IPTSD system configuration becomes necessary. The GUI must not receive unrestricted host filesystem access merely to edit `/etc/iptsd.conf`.
+
+## Updates and community support
+
+The project is prepared for GitHub Releases and native package updates. GitHub’s public Releases API exposes release tags, assets, download URLs, and asset digests [7]. The intended update flow is to direct users to a verified release asset, `flatpak update`, or `pacman -Syu`; Sexy S-Pen should not silently replace its own executable.
+
+If Sexy S-Pen helps your workflow, visit the project at [github.com/pfn000/sexy-s-pen](https://github.com/pfn000/sexy-s-pen), share it, open issues, and contribute improvements. A Liberapay button is included in the interface and currently points to `https://liberapay.com/pfn000/`; replace that URL if the project uses a different Liberapay account.
+
+## Development
 
 ```bash
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build
-sudo cmake --install build
+./build/sexy-s-pen
 ```
 
-Launch it from the application menu or with:
-
-```bash
-surface-pen-control
-```
-
-## Integration notes
-
-The first version saves preferences to `~/.config/surface-pen-control.ini`. The interface intentionally does not silently edit `/etc/iptsd.conf`, restart system services, or invoke `sudo`. A production integration should add a narrowly-scoped `polkit` helper or a system service that accepts only validated keys such as `DisableOnPalm`, `DisableOnStylus`, and `TipDistance`, then restarts the correct iptsd unit through the current `iptsd-systemd` mechanism.
-
-The pen's pressure and tilt controls can be displayed and tuned only if the device, kernel, libinput, and compositor expose those axes. The panel cannot manufacture tilt data or guarantee hover-distance events when the underlying stack does not report them. This is consistent with libinput's separation of tablet tool, pad, and integrated touch devices [3].
-
-## Recommended next integration step
-
-After verifying the UI on the user's Surface Pro 7, inspect the actual event devices with `libinput list-devices`, `libinput debug-events`, and, if needed, `evtest`. The next backend milestone is a read-only event monitor that identifies the actual stylus node, reports whether pressure/tilt/proximity/buttons are present, and enables only settings that are confirmed by the running stack.
+The sandbox used to prepare this repository did not have the Qt development toolchain installed, so compilation should be performed on the CachyOS Surface system or in CI. GitHub Actions is configured in `.github/workflows/build.yml` to install Qt and build the project on pushes and pull requests.
 
 ## References
 
-[1]: https://github.com/linux-surface/iptsd "linux-surface/iptsd — Userspace daemon for Intel Precise Touch & Stylus"
+[1]: https://github.com/linux-surface/iptsd "linux-surface/iptsd"
 [2]: https://raw.githubusercontent.com/linux-surface/iptsd/master/etc/iptsd.conf "iptsd default configuration"
 [3]: https://wayland.freedesktop.org/libinput/doc/latest/tablet-support.html "libinput tablet support documentation"
+[4]: https://github.com/bluez/bluez/blob/master/doc/org.bluez.Battery.rst "BlueZ Battery1 D-Bus interface"
+[5]: https://wiki.archlinux.org/title/Arch_User_Repository "ArchWiki — Arch User Repository"
+[6]: https://docs.flatpak.org/en/latest/flatpak-command-reference.html "Flatpak command reference"
+[7]: https://docs.github.com/en/rest/releases/releases "GitHub Releases REST API"
