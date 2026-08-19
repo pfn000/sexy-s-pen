@@ -98,9 +98,13 @@ A future Flathub submission should keep permissions narrow and use a carefully s
 
 The release channel is hosted at [github.com/pfn000/sexy-s-pen/releases](https://github.com/pfn000/sexy-s-pen/releases). GitHub’s public Releases API exposes release tags, assets, download URLs, and asset digests [4]. The intended update flow is to use a verified release asset, `flatpak update`, or `pacman -Syu`; Sexy S-Pen should never silently replace its own executable.
 
+## Companion project
+
+NCOM AudeX is the separate artist-first painting and UI/Product Studio companion: [github.com/pfn000/NCOM-AudeX](https://github.com/pfn000/NCOM-AudeX). Sexy S-Pen focuses on Surface Linux pen capabilities; AudeX focuses on painting, design systems, prototyping, and code export.
+
 ## Community
 
-If Sexy S-Pen makes your workflow nicer, visit the [public GitHub repository](https://github.com/pfn000/sexy-s-pen), share it, open issues, and contribute improvements. The application also includes a Liberapay button pointing to `https://liberapay.com/pfn000/`; replace that URL if the project adopts another Liberapay account.
+If Sexy S-Pen makes your workflow nicer, visit the [public GitHub repository](https://github.com/pfn000/sexy-s-pen), share it, open issues, and contribute improvements. The application also includes a [Liberapay support link](https://liberapay.com/pfn000/). If you want to follow the artist-tool side of the project, visit the separate [NCOM AudeX repository](https://github.com/pfn000/NCOM-AudeX).
 
 ### Fork with respect
 
