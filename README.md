@@ -104,7 +104,7 @@ If Sexy S-Pen makes your workflow nicer, visit the [public GitHub repository](ht
 
 ### Fork with respect
 
-Forks and experiments are welcome. Please keep the original project link, GPL license, image attributions, and meaningful credit to **pfn000** intact. If you publish a substantially renamed or redistributed derivative, please contact the maintainer first so we can coordinate improvements, avoid confusion, and make sure the original project receives clear credit. GitHub forks and the GPL-3.0-or-later license remain governed by their normal permissions; this is a community request for respectful collaboration, not an attempt to override those rights. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guidance.
+Forks and experiments are welcome. Please keep the original project link, GPL license, image attributions, and meaningful credit to **pfn000** intact. If you publish a substantially renamed or redistributed derivative, please contact the maintainer first so we can coordinate improvements, avoid confusion, and make sure the original project receives clear credit. GitHub forks and the GPL-3.0-or-later license remain governed by their normal permissions; this is a community request for respectful collaboration, not an attempt to override those rights. For private fork coordination, you may message the maintainer on Signal at [**@Saidie.10**](https://signal.me/#eu/ZIWHg_RQMXsICHB_NBchn-W3n2tzj1M7WuZnmGIL7W3nWHugo6sx-MaY_8jJmPYSfc). See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guidance.
 
 ## Development
 

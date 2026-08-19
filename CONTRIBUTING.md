@@ -18,4 +18,4 @@ Do not imply that a fork is the official Sexy S-Pen project unless it is maintai
 
 ## Contact
 
-The primary project is maintained at [github.com/pfn000/sexy-s-pen](https://github.com/pfn000/sexy-s-pen). Please open an issue for public technical discussion or contact the maintainer through the GitHub profile before launching a substantially renamed public derivative.
+The primary project is maintained at [github.com/pfn000/sexy-s-pen](https://github.com/pfn000/sexy-s-pen). Please open an issue for public technical discussion. For private collaboration or fork coordination, you may message the maintainer on Signal at [**@Saidie.10**](https://signal.me/#eu/ZIWHg_RQMXsICHB_NBchn-W3n2tzj1M7WuZnmGIL7W3nWHugo6sx-MaY_8jJmPYSfc). Please contact the maintainer before launching a substantially renamed public derivative.
