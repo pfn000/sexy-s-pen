@@ -1,5 +1,5 @@
 pkgname=sexy-s-pen
-pkgver=0.2.0
+pkgver=0.3.0
 pkgrel=1
 pkgdesc='Artist-oriented Surface Pen control centre for KDE Wayland'
 arch=('x86_64')

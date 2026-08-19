@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("Sexy S-Pen"));
     app.setOrganizationName(QStringLiteral("Sexy S-Pen Community"));
-    app.setApplicationVersion(QStringLiteral("0.2.0"));
+    app.setApplicationVersion(QStringLiteral("0.3.0"));
 
     PenController controller;
     QQmlApplicationEngine engine;
